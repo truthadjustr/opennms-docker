@@ -42,9 +42,10 @@ __manage_db() {
 __init() {
   if [ "$INSTALL_DB" = "y" ] || [ -e $OPENNMS_HOME/etc/install_onmsdb ]
   then
-     supervisord
-     __install_db
-     __manage_db
+     /usr/sbin/sshd -D &
+     sudo -u postgres /usr/pgsql-9.5/bin/postgres -D /var/lib/pgsql/9.5/data -c config_file=/var/lib/pgsql/9.5/data/postgresql.conf &
+     __install_db && /opt/opennms/bin/opennms -f start
+     #__manage_db
   else
      supervisord
   fi
