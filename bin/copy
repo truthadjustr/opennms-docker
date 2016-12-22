@@ -33,14 +33,11 @@
 ## COPY DOCKER FILES
 ##----------------------------------------
 copy() {
-   rm $WD/docker-compose.yml &> /dev/null 
    rm $WD/Dockerfile &> /dev/null    
    if [ "$1" = "p" ] 
    then
-      cp $WD/src/dockerfiles/docker-compose.yml.public $WD/docker-compose.yml
       cp $WD/src/dockerfiles/Dockerfile.public $WD/Dockerfile
    else
-      cp $WD/src/dockerfiles/docker-compose.yml.local $WD/docker-compose.yml
       cp $WD/src/dockerfiles/Dockerfile.local $WD/Dockerfile
    fi
 }
