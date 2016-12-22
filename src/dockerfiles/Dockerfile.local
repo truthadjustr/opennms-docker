@@ -1,18 +1,19 @@
 #==============================================================================
 # Author: Markus Schneider
-#
-# CentOS-6.7 x86_64 / PostgreSQL 9.4 / OpenNMS
-#
+# Arch:             x86_64
+# Entities:         CentOS-7.2
+#                   PostgreSQL-9.5
+#                   OpenNMS-18.2.1 
 #==============================================================================
 
-FROM opennms/postgresql:pg9.4_co6.7 
-MAINTAINER ronny@opennms.org & markus.schneider73@gmail.com
+FROM schneidermatic/postgresql:postgresql-9.5_centos-7.2
+MAINTAINER markus.schneider73@gmail.com
 
 ## Set work dir 
 WORKDIR /tmp
 
 ## JAVA ENV
-ENV JAVA_VERSION 8u45
+ENV JAVA_VERSION 8u111
 ENV BUILD_VERSION b14
 ENV JAVA_HOME=/usr/java/orajava8
 
@@ -26,72 +27,42 @@ ENV OPENNMS_HOME /opt/opennms
 ##------------------------------------------------------------------------------
 ## BASE INSTALL
 ##------------------------------------------------------------------------------
-RUN yum -y install wget \
-    curl \
-    git \
-    tar \
-    unzip \
-    sudo \
-    openssh \
-    openssh-server \
-    openssh-clients \
-    passwd
 
 ## Install JDK
 ## origin - https://github.com/Mashape/docker-java8
-RUN mkdir -p /opt/opennms/downloads
-COPY src/downloads /opt/opennms/downloads
-RUN yum -y install /opt/opennms/downloads/jdk-8u45-linux-x64.rpm
+RUN wget --no-cookies --no-check-certificate --header "Cookie: oraclelicense=accept-securebackup-cookie" "http://download.oracle.com/otn-pub/java/jdk/$JAVA_VERSION-$BUILD_VERSION/jdk-$JAVA_VERSION-linux-x64.rpm" -O /tmp/jdk-8-linux-x64.rpm
+RUN yum -y install ./jdk-8-linux-x64.rpm
 RUN yum clean all
 
 ## Add OpenNMS PGP Key
 RUN rpm --import http://yum.opennms.org/OPENNMS-GPG-KEY 
 
-## Add PKGs Begin 
-RUN rpm -Uvh /opt/opennms/downloads/jicmp-1.4.5-2.x86_64.rpm
+## Add PKGs Begin
+RUN rpm -Uvh /opt/opennms/downloads/jicmp-1.4.6-1.x86_64.rpm
 RUN rpm -Uvh /opt/opennms/downloads/jicmp6-1.2.4-1.x86_64.rpm
-RUN rpm -Uvh /opt/opennms/downloads/opennms-core-16.0.4-1.noarch.rpm
-RUN rpm -Uvh /opt/opennms/downloads/opennms-webapp-jetty-16.0.4-1.noarch.rpm
+RUN rpm -Uvh /opt/opennms/downloads/opennms-core-18.0.2-1.noarch.rpm
+RUN rpm -Uvh /opt/opennms/downloads/opennms-webapp-jetty-18.0.2-1.noarch.rpm
 
-## Add Config 
-RUN mkdir -p /opt/opennms/docker/config
-COPY src/config /opt/opennms/docker/config
+## File for initial OpenNMS DB installation
+RUN touch /opt/opennms/etc/install_onmsdb
 
-## Add Scripts
-RUN mkdir -p /opt/opennms/docker/scripts
-COPY src/scripts /opt/opennms/docker/scripts
+## Add Config
+RUN mkdir -p /opt/docker/config
+COPY src/config /opt/docker/config
 
-## Add SSHD Script 
-RUN mkdir -p /opt/openssh/bin
-COPY src/scripts/sshd /opt/openssh/bin/sshd
+## Update supervisord.conf 
+COPY src/config/supervisord.conf /etc/supervisord.conf
 
-## Copy Config
-COPY src/config/opennms-datasources.xml /opt/opennms/etc/opennms-datasources.xml
-COPY src/config/opennms.conf /opt/opennms/etc/opennms.conf
-COPY src/config/sshd_config /etc/ssh/sshd_config
-COPY src/scripts/bootstrap /opt/opennms/bin/bootstrap
+## Update 'bootstrap' file
+COPY src/scripts/bootstrap /opt/docker/scripts/bootstrap
+RUN chmod 775 /opt/docker/scripts/bootstrap
 
-## Set work dir
-WORKDIR /opt/opennms/docker/scripts
-
-## Run Scripts
-## Set Filesystem
-RUN ./setup setFs
-## Set OpenNMS Java
-RUN ./setup setJava
-## Set Credentials
-RUN ./setup setCrd
-## Set OpenNMS Db
-RUN touch /opt/opennms/etc/installDb
-
-## Set work dir
-WORKDIR /tmp
+## Add opennms wrapper script    
+ADD src/scripts/opennmsw.sh /opt/docker/scripts/opennmsw.sh
+RUN chmod 775 /opt/docker/scripts/opennmsw.sh
 
 ## Volumes for storing data outside of the container
 VOLUME ["/var/log/opennms","/var/opennnms"]
-
-## Run bootstrap script
-CMD bash -C '/opt/opennms/bin/bootstrap';'bash'
 
 ##------------------------------------------------------------------------------
 ## EXPOSED PORTS
@@ -106,5 +77,5 @@ CMD bash -C '/opt/opennms/bin/bootstrap';'bash'
 ## -- PostgreSQL         Port(5432)
 ## -- SNMP (AGENT)       Port(161)
 ## -- SNMP (SERVER)      Port(162)
-## -- SSH                Port(1022)
-EXPOSE 8980 8443 18980 1099 8101 61616 5817 5432 162 161 1022
+## -- SSH                Port(22)
+EXPOSE 8980 8443 18980 1099 8101 61616 5817 5432 162/udp 161/udp 
