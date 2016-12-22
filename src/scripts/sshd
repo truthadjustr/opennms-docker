@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+SERVICE_NAME="sshd"
+
+service $SERVICE_NAME start

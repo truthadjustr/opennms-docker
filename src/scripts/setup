@@ -1,0 +1,65 @@
+#!/usr/bin/env bash
+
+#******************************************************************************
+# Copyright 2014 the original author or authors.                              *
+#                                                                             *
+# Licensed under the Apache License, Version 2.0 (the "License");             *
+# you may not use this file except in compliance with the License.            *
+# You may obtain a copy of the License at                                     *
+#                                                                             *
+# http://www.apache.org/licenses/LICENSE-2.0                                  *
+#                                                                             *
+# Unless required by applicable law or agreed to in writing, software         *
+# distributed under the License is distributed on an "AS IS" BASIS,           *
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.    *
+# See the License for the specific language governing permissions and         *
+# limitations under the License.                                              *
+#******************************************************************************/
+
+CWD=$(pwd)
+source $CWD/setenv
+
+##----------------------------------------
+## Println
+##----------------------------------------
+println() {
+   printf " ===> TASK: %s\n" "$1" 
+}
+
+##----------------------------------------
+## Main
+##----------------------------------------
+main() {
+  if [ $1 = "setFs" ]
+  then
+    println "Set filesystem is running."
+    $CWD/setFs
+    println "Set filesystem is finished."
+  elif [ $1 = "setJava" ]
+  then
+    println "Set OpenNMS Java is running."
+    $CWD/setJava
+    println "Set OpenNMS Java is finished."
+  elif [ $1 = "setKaraf" ]
+  then
+    println "Set OpenNMS Karaf is running."
+    $CWD/setKaraf
+    println "Set OpenNMS Karaf is finished."
+  elif [ $1 = "setDb" ]
+  then
+    println "Set OpenNMS Db is running."
+    $CWD/setDb
+    println "Set OpenNMS Db is finished."
+  elif [ $1 = "setCrd" ]
+  then
+    println "Set Credentials is running."
+    $CWD/setCrd
+    println "Set Credentials is finished." 
+  elif [ $1 = "run" ]
+  then
+    println "Run OpenNMS."
+    $CWD/run
+  fi
+}
+
+main $@

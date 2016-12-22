@@ -1,0 +1,55 @@
+#!/usr/bin/env bash
+
+#******************************************************************************
+# Copyright 2015 the original author or authors.                              *
+#                                                                             *
+# Licensed under the Apache License, Version 2.0 (the "License");             *
+# you may not use this file except in compliance with the License.            *
+# You may obtain a copy of the License at                                     *
+#                                                                             *
+# http://www.apache.org/licenses/LICENSE-2.0                                  *
+#                                                                             *
+# Unless required by applicable law or agreed to in writing, software         *
+# distributed under the License is distributed on an "AS IS" BASIS,           *
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.    *
+# See the License for the specific language governing permissions and         *
+# limitations under the License.                                              *
+#******************************************************************************/
+
+#==============================================================================
+# SCRIPT:   fetch 
+# AUTOHR:   Markus Schneider
+# DATE:     01/08/2015
+# REV:      1.0.0
+# PLATFORM: Noarch
+# PURPOSE:  Fetch all needed sources
+#==============================================================================
+
+##----------------------------------------
+## DEFINE YOUR VARIABLES HERE
+##----------------------------------------
+JAVA_VERSION=8u45
+BUILD_VERSION=b14
+
+##----------------------------------------
+## RUN INTERACTIVE
+##----------------------------------------
+download() {
+    [ ! -e "$1/jdk-$JAVA_VERSION-linux-x64.rpm" ] && wget -P "$1" --no-cookies --no-check-certificate --header "Cookie: oraclelicense=accept-securebackup-cookie" "http://download.oracle.com/otn-pub/java/jdk/$JAVA_VERSION-$BUILD_VERSION/jdk-$JAVA_VERSION-linux-x64.rpm" 
+    [ ! -e "$1/jicmp-1.4.5-2.x86_64.rpm" ] && wget -P "$1" http://yum.opennms.eu/stable/rhel6/opennms/x64/jicmp-1.4.5-2.x86_64.rpm
+    [ ! -e "$1/jicmp6-1.2.4-1.x86_64.rpm" ] && wget -P "$1" http://yum.opennms.eu/stable/rhel6/opennms/x64/jicmp6-1.2.4-1.x86_64.rpm
+    [ ! -e "$1/opennms-core-16.0.4-1.noarch.rpm" ] && wget -P "$1" http://yum.opennms.eu/stable/common/opennms/opennms-core-16.0.4-1.noarch.rpm
+    [ ! -e "$1/opennms-webapp-jetty-16.0.4-1.noarch.rpm" ] && wget -P "$1" http://yum.opennms.eu/stable/common/opennms/opennms-webapp-jetty-16.0.4-1.noarch.rpm
+}
+
+##----------------------------------------
+## MAIN
+##----------------------------------------
+fetchMain() {
+   if [ "$1" != "import" ]
+   then 
+      download "$WD/src/downloads"
+   fi
+}
+
+fetchMain "$@"

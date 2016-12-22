@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+BRANCH="all/16.0.4-1_pg9.4_co6.7"
+
+git remote add upstream https://github.com/opennms-forge/opennms-dockerfiles
+git fetch upstream
+git checkout $BRANCH
+git merge upstream/$BRANCH

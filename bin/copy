@@ -1,0 +1,58 @@
+#!/usr/bin/env bash
+
+#******************************************************************************
+# Copyright 2015 the original author or authors.                              *
+#                                                                             *
+# Licensed under the Apache License, Version 2.0 (the "License");             *
+# you may not use this file except in compliance with the License.            *
+# You may obtain a copy of the License at                                     *
+#                                                                             *
+# http://www.apache.org/licenses/LICENSE-2.0                                  *
+#                                                                             *
+# Unless required by applicable law or agreed to in writing, software         *
+# distributed under the License is distributed on an "AS IS" BASIS,           *
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.    *
+# See the License for the specific language governing permissions and         *
+# limitations under the License.                                              *
+#******************************************************************************/
+
+#==============================================================================
+# SCRIPT:   copy 
+# AUTOHR:   Markus Schneider
+# DATE:     01/08/2015
+# REV:      1.0.0
+# PLATFORM: Noarch
+# PURPOSE:  Copy Docker files
+#==============================================================================
+
+##----------------------------------------
+## DEFINE YOUR VARIABLES HERE
+##----------------------------------------
+
+##----------------------------------------
+## COPY DOCKER FILES
+##----------------------------------------
+copy() {
+   rm $WD/docker-compose.yml &> /dev/null 
+   rm $WD/Dockerfile &> /dev/null    
+   if [ "$1" = "p" ] 
+   then
+      cp $WD/src/dockerfiles/docker-compose.yml.public $WD/docker-compose.yml
+      cp $WD/src/dockerfiles/Dockerfile.public $WD/Dockerfile
+   else
+      cp $WD/src/dockerfiles/docker-compose.yml.local $WD/docker-compose.yml
+      cp $WD/src/dockerfiles/Dockerfile.local $WD/Dockerfile
+   fi
+}
+
+##----------------------------------------
+## MAIN
+##----------------------------------------
+cpfMain() {
+   if [ "$1" != "import" ]
+   then 
+      copy "$@"
+   fi
+}
+
+cpfMain "$@"

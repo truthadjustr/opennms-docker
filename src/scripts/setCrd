@@ -1,0 +1,14 @@
+#!/bin/bash
+
+password="opennms"
+
+#--------------------
+# Add Groups
+#--------------------
+groupadd -g 1149 opennms
+
+#--------------------
+# Add Users
+#--------------------
+useradd -g opennms -m -u 15077 opennms
+echo -e "$password\n$password\n" | passwd opennms

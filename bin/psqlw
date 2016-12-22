@@ -1,0 +1,58 @@
+#!/usr/bin/env bash
+
+#******************************************************************************
+# Copyright 2015 the original author or authors.                              *
+#                                                                             *
+# Licensed under the Apache License, Version 2.0 (the "License");             *
+# you may not use this file except in compliance with the License.            *
+# You may obtain a copy of the License at                                     *
+#                                                                             *
+# http://www.apache.org/licenses/LICENSE-2.0                                  *
+#                                                                             *
+# Unless required by applicable law or agreed to in writing, software         *
+# distributed under the License is distributed on an "AS IS" BASIS,           *
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.    *
+# See the License for the specific language governing permissions and         *
+# limitations under the License.                                              *
+#******************************************************************************/
+
+#==============================================================================
+# SCRIPT:   psqlw 
+# AUTOHR:   Markus Schneider
+# DATE:     01/08/2015
+# REV:      1.0.0
+# PLATFORM: Noarch
+# PURPOSE:  Psql wrapper script for connecting with the Postgresql Container. 
+#==============================================================================
+
+
+##----------------------------------------
+## DEFINE VARIABLES HERE
+##----------------------------------------
+CONTAINER_NAME=$(docker ps | grep "$NAME" | awk '{ print $1 }')
+
+##----------------------------------------
+## LOGIN
+##----------------------------------------
+login() {
+   if which psql >> /dev/null 2>&1
+   then
+      IP_ADDRESS=$(docker inspect -f '{{ .NetworkSettings.IPAddress }}' $CONTAINER_NAME)
+      printf "Default password for user postgres is not set -- press return.\n"
+      psql -h $IP_ADDRESS -U postgres --password
+   else
+      printf "psql is not availabe. Please add it to the \$PATH.\n"
+   fi
+}
+
+##----------------------------------------
+## MAIN
+##----------------------------------------
+psqlwMain() {
+   if [ "$1" != "import" ] 
+   then
+      login
+   fi
+}
+
+psqlwMain "$@"
