@@ -30,8 +30,9 @@ ENV OPENNMS_HOME /opt/opennms
 
 ## Install JDK
 ## origin - https://github.com/Mashape/docker-java8
-RUN wget --no-cookies --no-check-certificate --header "Cookie: oraclelicense=accept-securebackup-cookie" "http://download.oracle.com/otn-pub/java/jdk/$JAVA_VERSION-$BUILD_VERSION/jdk-$JAVA_VERSION-linux-x64.rpm" -O /tmp/jdk-8-linux-x64.rpm
-RUN yum -y install ./jdk-8-linux-x64.rpm
+RUN mkdir -p /opt/opennms/downloads
+COPY src/downloads /opt/opennms/downloads
+RUN yum -y install /opt/opennms/downloads/jdk-8u111-linux-x64.rpm
 RUN yum clean all
 
 ## Add OpenNMS PGP Key
@@ -63,6 +64,9 @@ RUN chmod 775 /opt/docker/scripts/opennmsw.sh
 
 ## Volumes for storing data outside of the container
 VOLUME ["/var/log/opennms","/var/opennnms"]
+
+## Remove Downloads
+RUN rm -rf /opt/opennms/downloads/*
 
 ##------------------------------------------------------------------------------
 ## EXPOSED PORTS
