@@ -39,7 +39,7 @@ login() {
    then
       IP_ADDRESS=$(docker inspect -f '{{ .NetworkSettings.IPAddress }}' $CONTAINER_NAME)
       printf "Default password for user 'sysadm' is: 'changeit'.\n"
-      ssh sysadm@$IP_ADDRESS -p 2224
+      ssh sysadm@$IP_ADDRESS -p 22
    else
       printf "ssh is not availabe. Please add it to the \$PATH.\n"
    fi

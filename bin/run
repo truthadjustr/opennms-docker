@@ -37,7 +37,7 @@ HOSTNAME="lx1"
 ## RUN DAEMON 
 ##----------------------------------------
 runDaemon() {
-   docker run -v $(pwd):$(pwd) -w $(pwd) -h $HOSTNAME -dit -p 8980:8980 -p 18980:18980 -p 1099:1099 -p 8101:8101 -p 61616:61616 -p 5817:5817 -p 161-162:161-162/udp -p 2224:22 --name $NAME $IMAGE
+   docker run -v $(pwd):$(pwd) -w $(pwd) -h $HOSTNAME -dit -p 8980:8980 -p 18980:18980 -p 1099:1099 -p 8101:8101 -p 61616:61616 -p 5817:5817 -p 161-162:161-162/udp -p 22:22 --name $NAME $IMAGE
 }
 
 ##----------------------------------------
