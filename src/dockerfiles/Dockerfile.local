@@ -13,8 +13,8 @@ MAINTAINER markus.schneider73@gmail.com
 WORKDIR /tmp
 
 ## JAVA ENV
-ENV JAVA_VERSION 8u111
-ENV BUILD_VERSION b14
+ENV JAVA_VERSION 8u112
+ENV BUILD_VERSION b15
 ENV JAVA_HOME=/usr/java/orajava8
 
 ## OPENNMS ENV
@@ -32,7 +32,7 @@ ENV OPENNMS_HOME /opt/opennms
 ## origin - https://github.com/Mashape/docker-java8
 RUN mkdir -p /opt/opennms/downloads
 COPY src/downloads /opt/opennms/downloads
-RUN yum -y install /opt/opennms/downloads/jdk-8u111-linux-x64.rpm
+RUN yum -y install /opt/opennms/downloads/jdk-8u112-linux-x64.rpm
 RUN yum clean all
 
 ## Add OpenNMS PGP Key
