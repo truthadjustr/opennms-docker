@@ -42,6 +42,16 @@ RUN rpm -Uvh http://yum.opennms.org/stable/rhel7/jicmp/jicmp-1.4.6-1.x86_64.rpm
 RUN rpm -Uvh http://yum.opennms.org/stable/rhel7/jicmp6/jicmp6-1.2.4-1.x86_64.rpm
 RUN rpm -Uvh http://yum.opennms.org/stable/common/opennms/opennms-core-18.0.2-1.noarch.rpm
 RUN rpm -Uvh http://yum.opennms.org/stable/common/opennms/opennms-webapp-jetty-18.0.2-1.noarch.rpm
+RUN rpm -Uvh http://yum.opennms.org/stable/common/opennms/opennms-plugin-provisioning-snmp-asset-18.0.2-1.noarch.rpm
+RUN rpm -Uvh http://yum.opennms.org/stable/common/opennms/opennms-jmx-config-generator-18.0.2-1.noarch.rpm
+RUN rpm -Uvh http://yum.opennms.org/stable/common/opennms/opennms-plugin-northbounder-jms-18.0.2-1.noarch.rpm
+RUN rpm -Uvh http://yum.opennms.org/stable/common/opennms/opennms-plugin-protocol-cifs-18.0.2-1.noarch.rpm
+RUN rpm -Uvh http://yum.opennms.org/stable/common/opennms/opennms-plugin-protocol-dhcp-18.0.2-1.noarch.rpm
+RUN rpm -Uvh http://yum.opennms.org/stable/common/opennms/opennms-plugin-protocol-xml-18.0.2-1.noarch.rpm
+RUN rpm -Uvh http://yum.opennms.org/stable/common/opennms/opennms-plugin-protocol-nsclient-18.0.2-1.noarch.rpm
+RUN rpm -Uvh http://yum.opennms.org/stable/common/opennms/opennms-plugin-provisioning-snmp-hardware-inventory-18.0.2-1.noarch.rpm
+RUN rpm -Uvh http://yum.opennms.org/stable/common/opennms/opennms-plugin-ticketer-jira-18.0.2-1.noarch.rpm
+RUN rpm -Uvh http://yum.opennms.org/stable/common/opennms/opennms-plugin-ticketer-otrs-18.0.2-1.noarch.rpm
 
 ## File for initial OpenNMS DB installation
 RUN touch /opt/opennms/etc/install_onmsdb

@@ -40,6 +40,17 @@ download() {
     [ ! -e "$1/jicmp6-1.2.4-1.x86_64.rpm" ] && wget -P "$1" http://yum.opennms.org/stable/rhel7/jicmp6/jicmp6-1.2.4-1.x86_64.rpm 
     [ ! -e "$1/opennms-core-16.0.4-1.noarch.rpm" ] && wget -P "$1" http://yum.opennms.org/stable/common/opennms/opennms-core-18.0.2-1.noarch.rpm
     [ ! -e "$1/opennms-webapp-jetty-16.0.4-1.noarch.rpm" ] && wget -P "$1" http://yum.opennms.org/stable/common/opennms/opennms-webapp-jetty-18.0.2-1.noarch.rpm 
+    [ ! -e "$1/opennms-webapp-jetty-16.0.4-1.noarch.rpm" ] && wget -P "$1" http://yum.opennms.org/stable/common/opennms/opennms-plugin-provisioning-snmp-asset-18.0.2-1.noarch.rpm
+    [ ! -e "$1/opennms-webapp-jetty-16.0.4-1.noarch.rpm" ] && wget -P "$1" http://yum.opennms.org/stable/common/opennms/opennms-plugin-provisioning-snmp-asset-18.0.2-1.noarch.rpm
+    [ ! -e "$1/opennms-webapp-jetty-16.0.4-1.noarch.rpm" ] && wget -P "$1" http://yum.opennms.org/stable/common/opennms/opennms-jmx-config-generator-18.0.2-1.noarch.rp 
+    [ ! -e "$1/opennms-webapp-jetty-16.0.4-1.noarch.rpm" ] && wget -P "$1" http://yum.opennms.org/stable/common/opennms/opennms-plugin-northbounder-jms-18.0.2-1.noarch.rpm 
+    [ ! -e "$1/opennms-webapp-jetty-16.0.4-1.noarch.rpm" ] && wget -P "$1" http://yum.opennms.org/stable/common/opennms/opennms-plugin-protocol-cifs-18.0.2-1.noarch.rpm
+    [ ! -e "$1/opennms-webapp-jetty-16.0.4-1.noarch.rpm" ] && wget -P "$1" http://yum.opennms.org/stable/common/opennms/opennms-plugin-protocol-dhcp-18.0.2-1.noarch.rpm 
+    [ ! -e "$1/opennms-webapp-jetty-16.0.4-1.noarch.rpm" ] && wget -P "$1" http://yum.opennms.org/stable/common/opennms/opennms-plugin-protocol-xml-18.0.2-1.noarch.rpm 
+    [ ! -e "$1/opennms-webapp-jetty-16.0.4-1.noarch.rpm" ] && wget -P "$1" http://yum.opennms.org/stable/common/opennms/opennms-plugin-protocol-nsclient-18.0.2-1.noarch.rpm 
+    [ ! -e "$1/opennms-webapp-jetty-16.0.4-1.noarch.rpm" ] && wget -P "$1" http://yum.opennms.org/stable/common/opennms/opennms-plugin-provisioning-snmp-hardware-inventory-18.0.2-1.noarch.rpm 
+    [ ! -e "$1/opennms-webapp-jetty-16.0.4-1.noarch.rpm" ] && wget -P "$1" http://yum.opennms.org/stable/common/opennms/opennms-plugin-ticketer-jira-18.0.2-1.noarch.rpm 
+    [ ! -e "$1/opennms-webapp-jetty-16.0.4-1.noarch.rpm" ] && wget -P "$1" http://yum.opennms.org/stable/common/opennms/opennms-plugin-ticketer-otrs-18.0.2-1.noarch.rpm 
 }
 
 ##----------------------------------------

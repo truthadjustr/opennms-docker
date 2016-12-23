@@ -43,6 +43,16 @@ RUN rpm -Uvh /opt/opennms/downloads/jicmp-1.4.6-1.x86_64.rpm
 RUN rpm -Uvh /opt/opennms/downloads/jicmp6-1.2.4-1.x86_64.rpm
 RUN rpm -Uvh /opt/opennms/downloads/opennms-core-18.0.2-1.noarch.rpm
 RUN rpm -Uvh /opt/opennms/downloads/opennms-webapp-jetty-18.0.2-1.noarch.rpm
+RUN rpm -Uvh /opt/opennms/downloads/opennms-plugin-provisioning-snmp-asset-18.0.2-1.noarch.rpm
+RUN rpm -Uvh /opt/opennms/downloads/opennms-jmx-config-generator-18.0.2-1.noarch.rpm
+RUN rpm -Uvh /opt/opennms/downloads/opennms-plugin-northbounder-jms-18.0.2-1.noarch.rpm
+RUN rpm -Uvh /opt/opennms/downloads/opennms-plugin-protocol-cifs-18.0.2-1.noarch.rpm
+RUN rpm -Uvh /opt/opennms/downloads/opennms-plugin-protocol-dhcp-18.0.2-1.noarch.rpm
+RUN rpm -Uvh /opt/opennms/downloads/opennms-plugin-protocol-xml-18.0.2-1.noarch.rpm
+RUN rpm -Uvh /opt/opennms/downloads/opennms-plugin-protocol-nsclient-18.0.2-1.noarch.rpm
+RUN rpm -Uvh /opt/opennms/downloads/opennms-plugin-provisioning-snmp-hardware-inventory-18.0.2-1.noarch.rpm
+RUN rpm -Uvh /opt/opennms/downloads/opennms-plugin-ticketer-jira-18.0.2-1.noarch.rpm
+RUN rpm -Uvh /opt/opennms/downloads/opennms-plugin-ticketer-otrs-18.0.2-1.noarch.rpm
 
 ## File for initial OpenNMS DB installation
 RUN touch /opt/opennms/etc/install_onmsdb
