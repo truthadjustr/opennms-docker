@@ -1,9 +1,9 @@
 #==============================================================================
-# Author: Markus Schneider
-# Arch:             x86_64
-# Entities:         CentOS-7.2
-#                   PostgreSQL-9.5
-#                   OpenNMS-18.2.1 
+# Author:   Markus Schneider
+# Arch:     x86_64
+# Entities: CentOS-7.2
+#           PostgreSQL-9.5
+#           OpenNMS-18.2.1 
 #==============================================================================
 
 FROM schneidermatic/postgresql:postgresql-9.5_centos-7.2
@@ -64,8 +64,8 @@ COPY src/config /opt/docker/config
 COPY src/config/supervisord.conf /etc/supervisord.conf
 
 ## Update 'bootstrap' file
-COPY src/scripts/bootstrap /opt/docker/scripts/bootstrap
-RUN chmod 775 /opt/docker/scripts/bootstrap
+COPY src/scripts/bootstrap.sh /opt/docker/scripts/bootstrap.sh
+RUN chmod 775 /opt/docker/scripts/bootstrap.sh
 
 ## Add opennms wrapper script    
 ADD src/scripts/opennmsw.sh /opt/docker/scripts/opennmsw.sh
