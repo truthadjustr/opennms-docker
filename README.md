@@ -22,26 +22,27 @@ OpenNMS is shipped as an express version (all in one Dockerfile).
 ## Usage
 
 ```
-    * Set Environment Variables
+    1.  Set Environment Variables
 
       $ export IMAGE="schneidermatic/opennms:18.0.2_centos-7.2"
       $ export NAME="onms1"
 
-    * Pull the Docker image  
+    2.  Pull the Docker image  
 
       $ docker pull $IMAGE
 
-* Run a docker container
+    3.  Run a docker container
 
       $ docker run -v $(pwd):$(pwd) -w $(pwd) -h $NAME -dit -P --name $NAME $IMAGE
       $ CONTAINER_ID=$(docker ps | grep "$IMAGE" | awk '{ print $1 }')
       $ IP_ADDRESS=$(docker inspect -f '{{ .NetworkSettings.IPAddress }}' $CONTAINER_ID)
       $ echo "http://$IP_ADDRESS:8980/opennms"
 
-    The web application is exposed on TCP port 8980. You can login with default user *admin* with password *admin*. Please change immediately the default password to a secure password.
+    The web application is exposed on TCP port 8980. You can login with default user *admin* with
+    password *admin*. Please change immediately the default password to a secure password.
 
-    NOTE: It takes nearly 60 seconds or more till you can access the web-console due to database installation process.
-
+    NOTE: The first start takes nearly 60 seconds or more till you can access the web-console due to
+    the initial database installation process.
 ```
 
 ## Support and Issues
