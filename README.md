@@ -38,10 +38,12 @@ Don't use it in production environments!
 
       $ docker run -v $(pwd):$(pwd) -w $(pwd) -h $NAME -dit -P --name $NAME $IMAGE
 
-    The web application is exposed on TCP port 8980 (url http://localhost:8980/opennms). You can login with    default user *admin* with password *admin*. Please change immediately the default password to a secure     password.
+    The web application is exposed on TCP port 8980 (url http://localhost:8980/opennms). You can login
+    with default user *admin* with password *admin*. Please change immediately the default password to
+    a secure password.
 
-    NOTE: The first start takes nearly 60 seconds or more till you can access the web-console due to the 
-    initial database installation process.
+    NOTE: The first start takes nearly 60 seconds or more till you are able to access the web-console. 
+    This is because of the initial database installation process.
 ```
 
 ## Support and Issues
