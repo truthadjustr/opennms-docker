@@ -22,21 +22,21 @@ OpenNMS is shipped as an express version (all in one Dockerfile).
 ## Usage
 
 ```
-* Set Environment Variables
+    * Set Environment Variables
 
-    $ export IMAGE="schneidermatic/opennms:18.0.2_centos-7.2"
-    $ export NAME="onms1"
+      $ export IMAGE="schneidermatic/opennms:18.0.2_centos-7.2"
+      $ export NAME="onms1"
 
-* Pull the Docker image  
+    * Pull the Docker image  
 
-    $ docker pull $IMAGE
+      $ docker pull $IMAGE
 
 * Run a docker container
 
-    $ docker run -v $(pwd):$(pwd) -w $(pwd) -h $NAME -dit -P --name $NAME $IMAGE
-    $ CONTAINER_ID=$(docker ps | grep "$IMAGE" | awk '{ print $1 }')
-    $ IP_ADDRESS=$(docker inspect -f '{{ .NetworkSettings.IPAddress }}' $CONTAINER_ID)
-    $ echo "http://$IP_ADDRESS:8980/opennms"
+      $ docker run -v $(pwd):$(pwd) -w $(pwd) -h $NAME -dit -P --name $NAME $IMAGE
+      $ CONTAINER_ID=$(docker ps | grep "$IMAGE" | awk '{ print $1 }')
+      $ IP_ADDRESS=$(docker inspect -f '{{ .NetworkSettings.IPAddress }}' $CONTAINER_ID)
+      $ echo "http://$IP_ADDRESS:8980/opennms"
 
     The web application is exposed on TCP port 8980. You can login with default user *admin* with password *admin*. Please change immediately the default password to a secure password.
 
@@ -49,5 +49,5 @@ OpenNMS is shipped as an express version (all in one Dockerfile).
 Please open issues in the [GitHub issue](https://github.com/schneidermatic/opennms-dockerfiles) section.
 
 ## Author
+Markus Schneider
 
-markus.schneider73@gmail.com
