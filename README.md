@@ -15,8 +15,8 @@
 This repository provides different versions of OpenNMS Horizon docker images.
 OpenNMS is shipped as an express version (all in one Dockerfile). 
 
-## NOTE: This express version is for learning/staging/testing purposes only. 
-## Don't use this OpenNMS Docker image in production environments!
+**NOTE: This express version is for learning/staging/testing purposes only.** 
+**Don't use this OpenNMS Docker image in production environments!**
 
 ## Requirements
 
