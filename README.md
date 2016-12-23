@@ -44,6 +44,16 @@ OpenNMS is shipped as an express version (all in one Dockerfile).
 
     NOTE: The first start takes nearly 60 seconds or more till you are able to access the web-console. 
     This is because of the initial database installation process.
+
+    4.  SSH Login
+        
+        $ ssh sysadm@localhost -p 22 
+
+        Default password is **changeit**. User **sysadm** is member of the **wheel** group, so change this
+        password to a more secure one. After a successfull login run the following command ...
+
+        $ sudo passwd sysadm
+
 ```
 
 ## Support and Issues
