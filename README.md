@@ -13,7 +13,10 @@
 ## OpenNMS Horizon Docker files
 
 This repository provides different versions of OpenNMS Horizon docker images.
-OpenNMS is shipped as an express version (all in one Dockerfile).
+OpenNMS is shipped as an express version (all in one Dockerfile). 
+
+NOTE: This express version is for learning/staging/testing purposes only. 
+Don't use it in production environments!
 
 ## Requirements
 
@@ -41,13 +44,13 @@ OpenNMS is shipped as an express version (all in one Dockerfile).
     The web application is exposed on TCP port 8980. You can login with default user *admin* with
     password *admin*. Please change immediately the default password to a secure password.
 
-    NOTE: The first start takes nearly 60 seconds or more till you can access the web-console due to
-    the initial database installation process.
+    NOTE: The first start takes nearly 60 seconds or more till you can access the web-console due
+    to the initial database installation process.
 ```
 
 ## Support and Issues
 
-Please open issues in the [GitHub issue](https://github.com/schneidermatic/opennms-dockerfiles) section.
+Please open issues in the [GitHub issue](https://github.com/schneidermatic/opennms-dockerfiles/issues) section.
 
 ## Author
 Markus Schneider
