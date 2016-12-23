@@ -15,8 +15,8 @@
 This repository provides different versions of OpenNMS Horizon docker images.
 OpenNMS is shipped as an express version (all in one Dockerfile). 
 
-NOTE: This express version is for learning/staging/testing purposes only. 
-Don't use it in production environments!
+## NOTE: This express version is for learning/staging/testing purposes only. 
+## Don't use this OpenNMS Docker image in production environments!
 
 ## Requirements
 
@@ -36,10 +36,10 @@ Don't use it in production environments!
 
     3.  Run Docker container
 
-      $ docker run -v $(pwd):$(pwd) -w $(pwd) -h $NAME -dit -P --name $NAME $IMAGE
+      $ docker run -v $(pwd):$(pwd) -w $(pwd) -h $NAME -dit -p 8980:8980 -p 18980:18980 -p 1099:1099 -p 8101:8101 -p 61616:61616 -p 5817:5817 -p 161-162:161-162/udp -p 22:22 --name $NAME $IMAGE
 
-    The web application is exposed on TCP port 8980 (url http://localhost:8980/opennms). You can login
-    with default user *admin* with password *admin*. Please change immediately the default password to
+    The web application is exposed on TCP port 8980 (URL - http://localhost:8980/opennms). You can login
+    with default user **admin** with password **admin**. Please change immediately the default password to
     a secure password.
 
     NOTE: The first start takes nearly 60 seconds or more till you are able to access the web-console. 
@@ -52,4 +52,3 @@ Please open issues in the [GitHub issue](https://github.com/schneidermatic/openn
 
 ## Author
 Markus Schneider
-
