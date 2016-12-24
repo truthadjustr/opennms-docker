@@ -1,8 +1,8 @@
 
 ## Supported tags
 
-* `latest`, currently 18.0.2-1 
-* `18.0.2-1`, stable Horizon
+* `latest`, currently opennms-xp-18.0.2_centos-7.2
+* `opennms-xp-18.0.2_centos-7.2`, stable Horizon
 
 ### 18.0.2
 
@@ -27,7 +27,7 @@ OpenNMS is shipped as an express version (all in one Dockerfile).
 ```
     1.  Set Environment Variables
 
-      $ export IMAGE="schneidermatic/opennms:18.0.2_centos-7.2"
+      $ export IMAGE="schneidermatic/opennms:opennms-xp-18.0.2_centos-7.2"
       $ export NAME="onms1"
 
     2.  Pull Docker image  
@@ -39,8 +39,8 @@ OpenNMS is shipped as an express version (all in one Dockerfile).
       $ docker run -v $(pwd):$(pwd) -w $(pwd) -h $NAME -dit -p 8980:8980 -p 18980:18980 -p 1099:1099 -p 8101:8101 -p 61616:61616 -p 5817:5817 -p 161-162:161-162/udp -p 22:22 --name $NAME $IMAGE
 
     The web application is exposed on TCP port 8980 (URL - http://localhost:8980/opennms). You can login
-    with default user **admin** with password **admin**. Please change immediately the default password to
-    a secure password.
+    with default user <b>admin</b> with password <b>admin</b>. Please change immediately the default password
+    to a secure password.
 
     NOTE: The first start takes nearly 60 seconds or more till you are able to access the web-console. 
     This is because of the initial database installation process.
@@ -49,7 +49,7 @@ OpenNMS is shipped as an express version (all in one Dockerfile).
         
         $ ssh sysadm@localhost -p 22 
 
-        Default password is **changeit**. User **sysadm** is member of the **wheel** group, so change this
+        Default password is <b>changeit</b>. User <b>sysadm</b> is member of the <b>wheel</b> group, so change this
         password to a more secure one. After a successfull login run the following command ...
 
         $ sudo passwd sysadm
