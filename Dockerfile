@@ -78,7 +78,7 @@ COPY src/config /opt/docker/config
 COPY src/config/supervisord.conf /etc/supervisord.conf
 
 ## Update 'bootstrap' file
-COPY src/scripts/bootstrap /opt/docker/scripts/bootstrap.sh
+COPY src/scripts/bootstrap.sh /opt/docker/scripts/bootstrap.sh
 RUN chmod 775 /opt/docker/scripts/bootstrap.sh
 
 ## Add opennms wrapper script    
