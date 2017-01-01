@@ -1,10 +1,24 @@
-#==============================================================================
-# Author:   Markus Schneider
-# Arch:     x86_64
-# Entities: CentOS-7.2
-#           PostgreSQL-9.5
-#           OpenNMS-18.2.1 
-#==============================================================================
+#******************************************************************************
+# Copyright 2016 the original author or authors.                              *
+#                                                                             *
+# Licensed under the Apache License, Version 2.0 (the "License");             *
+# you may not use this file except in compliance with the License.            *
+# You may obtain a copy of the License at                                     *
+#                                                                             *
+# http://www.apache.org/licenses/LICENSE-2.0                                  *
+#                                                                             *
+# Unless required by applicable law or agreed to in writing, software         *
+# distributed under the License is distributed on an "AS IS" BASIS,           *
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.    *
+# See the License for the specific language governing permissions and         *
+# limitations under the License.                                              *
+#_____________________________________________________________________________*
+# Author:   Markus Schneider                                                  *
+# Arch:     x86_64                                                            *
+# Entities: CentOS-7.2                                                        *
+#           PostgreSQL-9.5                                                    *
+#           OpenNMS-18.2.1                                                    *
+#******************************************************************************/
 
 FROM schneidermatic/postgresql:postgresql-9.5_centos-7.2
 MAINTAINER markus.schneider73@gmail.com
@@ -15,7 +29,7 @@ WORKDIR /tmp
 ## JAVA ENV
 ENV JAVA_VERSION 8u112
 ENV BUILD_VERSION b15
-ENV JAVA_HOME=/usr/java/jdk1.8.0_112
+ENV JAVA_HOME=/usr/java/orajava8
 
 ## OPENNMS ENV
 ENV OPENNMS_HOME /opt/opennms
@@ -30,28 +44,29 @@ ENV OPENNMS_HOME /opt/opennms
 
 ## Install JDK
 ## origin - https://github.com/Mashape/docker-java8
-RUN wget --no-cookies --no-check-certificate --header "Cookie: oraclelicense=accept-securebackup-cookie" "http://download.oracle.com/otn-pub/java/jdk/$JAVA_VERSION-$BUILD_VERSION/jdk-$JAVA_VERSION-linux-x64.rpm" -O /tmp/jdk-8-linux-x64.rpm
-RUN yum -y install ./jdk-8-linux-x64.rpm
+RUN mkdir -p /opt/opennms/downloads
+COPY src/downloads /opt/opennms/downloads
+RUN yum -y install /opt/opennms/downloads/jdk-8u112-linux-x64.rpm
 RUN yum clean all
 
 ## Add OpenNMS PGP Key
 RUN rpm --import http://yum.opennms.org/OPENNMS-GPG-KEY 
 
-## Add PKGs Begin 
-RUN rpm -Uvh http://yum.opennms.org/stable/rhel7/jicmp/jicmp-1.4.6-1.x86_64.rpm
-RUN rpm -Uvh http://yum.opennms.org/stable/rhel7/jicmp6/jicmp6-1.2.4-1.x86_64.rpm
-RUN rpm -Uvh http://yum.opennms.org/stable/common/opennms/opennms-core-18.0.2-1.noarch.rpm
-RUN rpm -Uvh http://yum.opennms.org/stable/common/opennms/opennms-webapp-jetty-18.0.2-1.noarch.rpm
-RUN rpm -Uvh http://yum.opennms.org/stable/common/opennms/opennms-plugin-provisioning-snmp-asset-18.0.2-1.noarch.rpm
-RUN rpm -Uvh http://yum.opennms.org/stable/common/opennms/opennms-jmx-config-generator-18.0.2-1.noarch.rpm
-RUN rpm -Uvh http://yum.opennms.org/stable/common/opennms/opennms-plugin-northbounder-jms-18.0.2-1.noarch.rpm
-RUN rpm -Uvh http://yum.opennms.org/stable/common/opennms/opennms-plugin-protocol-cifs-18.0.2-1.noarch.rpm
-RUN rpm -Uvh http://yum.opennms.org/stable/common/opennms/opennms-plugin-protocol-dhcp-18.0.2-1.noarch.rpm
-RUN rpm -Uvh http://yum.opennms.org/stable/common/opennms/opennms-plugin-protocol-xml-18.0.2-1.noarch.rpm
-RUN rpm -Uvh http://yum.opennms.org/stable/common/opennms/opennms-plugin-protocol-nsclient-18.0.2-1.noarch.rpm
-RUN rpm -Uvh http://yum.opennms.org/stable/common/opennms/opennms-plugin-provisioning-snmp-hardware-inventory-18.0.2-1.noarch.rpm
-RUN rpm -Uvh http://yum.opennms.org/stable/common/opennms/opennms-plugin-ticketer-jira-18.0.2-1.noarch.rpm
-RUN rpm -Uvh http://yum.opennms.org/stable/common/opennms/opennms-plugin-ticketer-otrs-18.0.2-1.noarch.rpm
+## Add PKGs Begin
+RUN rpm -Uvh /opt/opennms/downloads/jicmp-1.4.6-1.x86_64.rpm
+RUN rpm -Uvh /opt/opennms/downloads/jicmp6-1.2.4-1.x86_64.rpm
+RUN rpm -Uvh /opt/opennms/downloads/opennms-core-18.0.2-1.noarch.rpm
+RUN rpm -Uvh /opt/opennms/downloads/opennms-webapp-jetty-18.0.2-1.noarch.rpm
+RUN rpm -Uvh /opt/opennms/downloads/opennms-plugin-provisioning-snmp-asset-18.0.2-1.noarch.rpm
+RUN rpm -Uvh /opt/opennms/downloads/opennms-jmx-config-generator-18.0.2-1.noarch.rpm
+RUN rpm -Uvh /opt/opennms/downloads/opennms-plugin-northbounder-jms-18.0.2-1.noarch.rpm
+RUN rpm -Uvh /opt/opennms/downloads/opennms-plugin-protocol-cifs-18.0.2-1.noarch.rpm
+RUN rpm -Uvh /opt/opennms/downloads/opennms-plugin-protocol-dhcp-18.0.2-1.noarch.rpm
+RUN rpm -Uvh /opt/opennms/downloads/opennms-plugin-protocol-xml-18.0.2-1.noarch.rpm
+RUN rpm -Uvh /opt/opennms/downloads/opennms-plugin-protocol-nsclient-18.0.2-1.noarch.rpm
+RUN rpm -Uvh /opt/opennms/downloads/opennms-plugin-provisioning-snmp-hardware-inventory-18.0.2-1.noarch.rpm
+RUN rpm -Uvh /opt/opennms/downloads/opennms-plugin-ticketer-jira-18.0.2-1.noarch.rpm
+RUN rpm -Uvh /opt/opennms/downloads/opennms-plugin-ticketer-otrs-18.0.2-1.noarch.rpm
 
 ## File for initial OpenNMS DB installation
 RUN touch /opt/opennms/etc/install_onmsdb
@@ -73,6 +88,9 @@ RUN chmod 775 /opt/docker/scripts/opennmsw.sh
 
 ## Volumes for storing data outside of the container
 VOLUME ["/var/log/opennms","/var/opennnms"]
+
+## Remove Downloads
+RUN rm -rf /opt/opennms/downloads/*
 
 ##------------------------------------------------------------------------------
 ## EXPOSED PORTS
