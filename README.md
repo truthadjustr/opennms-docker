@@ -1,3 +1,10 @@
+## OpenNMS Horizon Docker files
+
+This repository provides different versions of OpenNMS Horizon docker images.
+OpenNMS is shipped as an express version (all in one Dockerfile). 
+
+**NOTE: This express version is for learning/staging/testing purposes only.** 
+**Don't use this OpenNMS Docker image in production environments!**
 
 ## Supported tags
 
@@ -9,14 +16,6 @@
 * CentOS 7.2 Oracle jdk1.8.0_112
 * CentOS 7.2 PostgreSQL 9.5.x latest
 * CentOS 7.2 OpenNMS 18.0.2
-
-## OpenNMS Horizon Docker files
-
-This repository provides different versions of OpenNMS Horizon docker images.
-OpenNMS is shipped as an express version (all in one Dockerfile). 
-
-**NOTE: This express version is for learning/staging/testing purposes only.** 
-**Don't use this OpenNMS Docker image in production environments!**
 
 ## Requirements
 
