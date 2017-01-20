@@ -81,9 +81,21 @@ COPY src/config/supervisord.conf /etc/supervisord.conf
 COPY src/scripts/bootstrap.sh /opt/docker/scripts/bootstrap.sh
 RUN chmod 775 /opt/docker/scripts/bootstrap.sh
 
-## Add opennms wrapper script    
+## Add OpenNMS wrapper script    
 ADD src/scripts/opennmsw.sh /opt/docker/scripts/opennmsw.sh
 RUN chmod 775 /opt/docker/scripts/opennmsw.sh
+
+## Add OpenNMS Configs 
+COPY src/config/logstash.xml /opt/opennms/etc/imports/pending/logstash.xml
+RUN chmod 775 /opt/opennms/etc/imports/pending/logstash.xml
+COPY src/config/logstash.xml /opt/opennms/etc/imports/logstash.xml
+RUN chmod 775 /opt/opennms/etc/imports/logstash.xml
+COPY src/config/eventd-configuration.xml /opt/opennms/etc/eventd-configuration.xml
+RUN chmod 775 /opt/opennms/etc/eventd-configuration.xml
+COPY src/config/eventconf.xml /opt/opennms/etc/eventconf.xml
+RUN chmod 775 /opt/opennms/etc/eventconf.xml
+COPY src/config/enterprise.logstash.generic.events.xml /opt/opennms/etc/events/enterprise.logstash.generic.events.xml
+RUN chmod 775 /opt/opennms/etc/events/enterprise.logstash.generic.events.xml
 
 ## Volumes for storing data outside of the container
 VOLUME ["/var/log/opennms","/var/opennnms"]
