@@ -1,0 +1,66 @@
+<events xmlns="http://xmlns.opennms.org/xsd/eventconf">
+<!-- output events: Linux  -->
+<event>
+	<uei>uei.opennms.org/enterprise/logstash/generic/state/1</uei>
+	<event-label>Logstash Generic Abnormal State Event</event-label>
+	<descr>
+		Description: %parm[Description]%&lt;br/&gt;
+		IncidentMessage: %parm[IncidentMessage]%&lt;br/&gt;
+		TicketPriority: %parm[TicketPriority]%&lt;br/&gt;
+		TicketOwner: %parm[TicketOwner]%&lt;br/&gt;
+		ITService: %parm[ITService]%&lt;br/&gt;
+		Collection: %parm[Collection]%&lt;br/&gt;
+		Component: %parm[Component]%&lt;br/&gt;
+		Source: %parm[Source]%&lt;br/&gt;
+		SubSource: %parm[SubSource]%&lt;br/&gt;
+		EventId: %parm[EventId]%&lt;br/&gt;
+		Type: %parm[Type]%&lt;br/&gt;
+		Origin: %parm[Origin]%&lt;br/&gt;
+		Message: %parm[Message]%&lt;br/&gt;
+		Hostname: %parm[Hostname]%&lt;br/&gt;
+	</descr>
+	<logmsg dest='logndisplay'>
+		%parm[Description]%&lt;br/&gt;
+		Type: %parm[Type]%
+	</logmsg>
+	<severity>Warning</severity>
+	<operinstruct>
+		&lt;a href="%parm[OperInstruct]%" target="_blank"&gt;%parm[OperInstruct]%&lt;/a&gt;
+	</operinstruct>
+	<alarm-data reduction-key="%uei%:%nodeid%:%parm[Source]%:%parm[SubSource]%:%parm[EventId]%:%parm[Hostname]%" alarm-type="1" auto-clean="false">
+		<update-field field-name="severity" update-on-reduction="true"/>
+	</alarm-data>
+</event> 
+<event>
+	<uei>uei.opennms.org/enterprise/logstash/generic/state/0</uei>
+	<event-label>Logstash Generic Normal State Event</event-label>
+	<descr>
+		Description: %parm[Description]%&lt;br/&gt;
+		IncidentMessage: %parm[IncidentMessage]%&lt;br/&gt;
+		TicketPriority: %parm[TicketPriority]%&lt;br/&gt;
+		TicketOwner: %parm[TicketOwner]%&lt;br/&gt;
+		ITService: %parm[ITService]%&lt;br/&gt;
+		Collection: %parm[Collection]%&lt;br/&gt;
+		Component: %parm[Component]%&lt;br/&gt;
+		Source: %parm[Source]%&lt;br/&gt;
+		SubSource: %parm[SubSource]%&lt;br/&gt;
+		EventId: %parm[EventId]%&lt;br/&gt;
+		Type: %parm[Type]%&lt;br/&gt;
+		Origin: %parm[Origin]%&lt;br/&gt;
+		Message: %parm[Message]%&lt;br/&gt;
+		Hostname: %parm[Hostname]%&lt;br/&gt;
+	</descr>
+	<logmsg dest='logndisplay'>
+		%parm[Description]%&lt;br/&gt;
+		Type: %parm[Type]%
+	</logmsg>
+	<severity>Normal</severity>
+	<operinstruct>
+		&lt;a href="%parm[OperInstruct]%" target="_blank"&gt;%parm[OperInstruct]%&lt;/a&gt;
+	</operinstruct>
+	<alarm-data reduction-key="%uei%:%nodeid%:%parm[Source]%:%parm[SubSource]%:%parm[EventId]%:%parm[Hostname]%"
+	 alarm-type="2"
+	 clear-key="uei.opennms.org/enterprise/logstash/generic/state/1:%nodeid%:%parm[Source]%:%parm[SubSource]%:%parm[EventId]%:%parm[Hostname]%"
+	 auto-clean="true"/>
+</event> 
+</events>
