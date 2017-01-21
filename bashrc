@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 #******************************************************************************
-# Copyright 2014 the original author or authors.                              *
+# Copyright 2017 the original author or authors.                              *
 #                                                                             *
 # Licensed under the Apache License, Version 2.0 (the "License");             *
 # you may not use this file except in compliance with the License.            *
@@ -19,16 +19,16 @@
 #==============================================================================
 # SCRIPT:   bashrc
 # AUTOHR:   Markus Schneider
-# DATE:     20/11/2015
-# REV:      1.0.0
+# DATE:     21/01/2017
+# REV:      1.1.0
 # PLATFORM: Noarch
 # PURPOSE:  Set the environment for the OpenNMS Dockerfile project.
 #==============================================================================
 
 export ORIGIN="schneidermatic"
-export ENTITY="opennms-xp"
+export ENTITY="opennms"
 export TAG="opennms-18.0.3_centos-7.2"
-export NAME="opennms_1"
+export NAME="onms_1"
 export IMAGE="$ORIGIN/$ENTITY:$TAG"
 
 export WD=$(pwd)

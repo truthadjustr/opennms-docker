@@ -16,38 +16,31 @@
 # Author:   Markus Schneider                                                  *
 # Arch:     x86_64                                                            *
 # Entities: CentOS-7.2                                                        *
-#           PostgreSQL-9.5                                                    *
-#           OpenNMS-18.2.1                                                    *
+#           OpenNMS-18.0.3                                                    *
 #******************************************************************************/
 
-FROM schneidermatic/postgresql:postgresql-9.5_centos-7.2
-MAINTAINER markus.schneider73@gmail.com
+FROM schneidermatic/java
+MAINTAINER schneidermatic
 
 ## Set work dir 
 WORKDIR /tmp
-
-## JAVA ENV
-ENV JAVA_VERSION 8u112
-ENV BUILD_VERSION b15
-ENV JAVA_HOME /usr/java/jdk1.8.0_112
 
 ## OPENNMS ENV
 ENV OPENNMS_HOME /opt/opennms
 ENV OPENNMS_VERSION 18.0.3-1
 
+## POSTGRES ENV
+ENV DB_HOST="pgdb1"
+ENV DB_PORT="5432"
+ENV DB_PASSWORD=""
+
 ## Upgrading system
-# RUN yum -y upgrade
-# RUN yum clean all
+RUN yum -y upgrade
+RUN yum clean all
 
 ##------------------------------------------------------------------------------
 ## BASE INSTALL
 ##------------------------------------------------------------------------------
-
-## Install JDK
-## origin - https://github.com/Mashape/docker-java8
-RUN wget --no-cookies --no-check-certificate --header "Cookie: oraclelicense=accept-securebackup-cookie" "http://download.oracle.com/otn-pub/java/jdk/$JAVA_VERSION-$BUILD_VERSION/jdk-$JAVA_VERSION-linux-x64.rpm" -O /tmp/jdk-8-linux-x64.rpm
-RUN yum -y install ./jdk-8-linux-x64.rpm
-RUN yum clean all
 
 ## Add OpenNMS PGP Key
 RUN rpm --import http://yum.opennms.org/OPENNMS-GPG-KEY 
@@ -87,16 +80,13 @@ ADD src/scripts/opennmsw.sh /opt/docker/scripts/opennmsw.sh
 RUN chmod 775 /opt/docker/scripts/opennmsw.sh
 
 ## Add OpenNMS Configs 
+COPY src/config/opennms-datasources.xml /opt/opennms/etc/opennms-datasources.xml
 COPY src/config/logstash.xml /opt/opennms/etc/imports/pending/logstash.xml
-RUN chmod 775 /opt/opennms/etc/imports/pending/logstash.xml
 COPY src/config/logstash.xml /opt/opennms/etc/imports/logstash.xml
-RUN chmod 775 /opt/opennms/etc/imports/logstash.xml
 COPY src/config/eventd-configuration.xml /opt/opennms/etc/eventd-configuration.xml
-RUN chmod 775 /opt/opennms/etc/eventd-configuration.xml
 COPY src/config/eventconf.xml /opt/opennms/etc/eventconf.xml
-RUN chmod 775 /opt/opennms/etc/eventconf.xml
 COPY src/config/enterprise.logstash.generic.events.xml /opt/opennms/etc/events/enterprise.logstash.generic.events.xml
-RUN chmod 775 /opt/opennms/etc/events/enterprise.logstash.generic.events.xml
+RUN chmod -R 775 /opt/opennms/etc
 
 ## Volumes for storing data outside of the container
 VOLUME ["/var/log/opennms","/var/opennnms"]

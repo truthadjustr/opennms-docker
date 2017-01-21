@@ -19,9 +19,9 @@
 OPENNMS_HOME=/opt/opennms
 DOCKER_HOME=/opt/docker
 
-export DB_HOST=${DB_HOST:-127.0.0.1}
+export DB_HOST=${DB_HOST:-pgdb1}
 export DB_PORT=${DB_PORT:-5432}
-export DB_PASSWORD=${DB_PASSWORD:-"changeit"}
+export DB_PASSWORD=${DB_PASSWORD:-""}
 
 __install_db() {
   cd $OPENNMS_HOME/etc
@@ -43,7 +43,6 @@ __init() {
   if [ "$INSTALL_DB" = "y" ] || [ -e $OPENNMS_HOME/etc/install_onmsdb ]
   then
      /usr/sbin/sshd -D &
-     sudo -u postgres /usr/pgsql-9.5/bin/postgres -D /var/lib/pgsql/9.5/data -c config_file=/var/lib/pgsql/9.5/data/postgresql.conf &
      __install_db && /opt/opennms/bin/opennms -f start
      #__manage_db
   else
@@ -53,6 +52,7 @@ __init() {
 
 main() {
   __init "$@"
+  supervisord
 }
 
 main "$@"
