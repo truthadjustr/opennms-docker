@@ -33,7 +33,7 @@ OpenNMS is shipped as an express version (all in one Dockerfile).
 ```
     1.  Set Environment Variables
 
-      $ export IMAGE="schneidermatic/opennms:opennms-xp-18.0.3_centos-7.2"
+      $ export IMAGE="schneidermatic/opennms"
       $ export NAME="onms1"
 
     2.  Pull Docker image  
