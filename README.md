@@ -8,8 +8,15 @@ OpenNMS is shipped as an express version (all in one Dockerfile).
 
 ## Supported tags
 
-* `latest`, currently opennms-xp-18.0.2_centos-7.2
+* `latest` is equivalent to `opennms-xp-18.0.3_centos-7.2`
+* `opennms-xp-18.0.3_centos-7.2`, stable Horizon
 * `opennms-xp-18.0.2_centos-7.2`, stable Horizon
+
+### 18.0.3
+
+* CentOS 7.2 Oracle jdk1.8.0_112
+* CentOS 7.2 PostgreSQL 9.5.x latest
+* CentOS 7.2 OpenNMS 18.0.3
 
 ### 18.0.2
 
