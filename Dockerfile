@@ -29,10 +29,11 @@ WORKDIR /tmp
 ## JAVA ENV
 ENV JAVA_VERSION 8u112
 ENV BUILD_VERSION b15
-ENV JAVA_HOME=/usr/java/jdk1.8.0_112
+ENV JAVA_HOME /usr/java/jdk1.8.0_112
 
 ## OPENNMS ENV
 ENV OPENNMS_HOME /opt/opennms
+ENV OPENNMS_VERSION 18.0.3-1
 
 ## Upgrading system
 # RUN yum -y upgrade
@@ -54,18 +55,18 @@ RUN rpm --import http://yum.opennms.org/OPENNMS-GPG-KEY
 ## Add PKGs Begin 
 RUN rpm -Uvh http://yum.opennms.org/stable/rhel7/jicmp/jicmp-1.4.6-1.x86_64.rpm
 RUN rpm -Uvh http://yum.opennms.org/stable/rhel7/jicmp6/jicmp6-1.2.4-1.x86_64.rpm
-RUN rpm -Uvh http://yum.opennms.org/stable/common/opennms/opennms-core-18.0.2-1.noarch.rpm
-RUN rpm -Uvh http://yum.opennms.org/stable/common/opennms/opennms-webapp-jetty-18.0.2-1.noarch.rpm
-RUN rpm -Uvh http://yum.opennms.org/stable/common/opennms/opennms-plugin-provisioning-snmp-asset-18.0.2-1.noarch.rpm
-RUN rpm -Uvh http://yum.opennms.org/stable/common/opennms/opennms-jmx-config-generator-18.0.2-1.noarch.rpm
-RUN rpm -Uvh http://yum.opennms.org/stable/common/opennms/opennms-plugin-northbounder-jms-18.0.2-1.noarch.rpm
-RUN rpm -Uvh http://yum.opennms.org/stable/common/opennms/opennms-plugin-protocol-cifs-18.0.2-1.noarch.rpm
-RUN rpm -Uvh http://yum.opennms.org/stable/common/opennms/opennms-plugin-protocol-dhcp-18.0.2-1.noarch.rpm
-RUN rpm -Uvh http://yum.opennms.org/stable/common/opennms/opennms-plugin-protocol-xml-18.0.2-1.noarch.rpm
-RUN rpm -Uvh http://yum.opennms.org/stable/common/opennms/opennms-plugin-protocol-nsclient-18.0.2-1.noarch.rpm
-RUN rpm -Uvh http://yum.opennms.org/stable/common/opennms/opennms-plugin-provisioning-snmp-hardware-inventory-18.0.2-1.noarch.rpm
-RUN rpm -Uvh http://yum.opennms.org/stable/common/opennms/opennms-plugin-ticketer-jira-18.0.2-1.noarch.rpm
-RUN rpm -Uvh http://yum.opennms.org/stable/common/opennms/opennms-plugin-ticketer-otrs-18.0.2-1.noarch.rpm
+RUN rpm -Uvh http://yum.opennms.org/stable/common/opennms/opennms-core-${OPENNMS_VERSION}.noarch.rpm
+RUN rpm -Uvh http://yum.opennms.org/stable/common/opennms/opennms-webapp-jetty-${OPENNMS_VERSION}.noarch.rpm
+RUN rpm -Uvh http://yum.opennms.org/stable/common/opennms/opennms-plugin-provisioning-snmp-asset-${OPENNMS_VERSION}.noarch.rpm
+RUN rpm -Uvh http://yum.opennms.org/stable/common/opennms/opennms-jmx-config-generator-${OPENNMS_VERSION}.noarch.rpm
+RUN rpm -Uvh http://yum.opennms.org/stable/common/opennms/opennms-plugin-northbounder-jms-${OPENNMS_VERSION}.noarch.rpm
+RUN rpm -Uvh http://yum.opennms.org/stable/common/opennms/opennms-plugin-protocol-cifs-${OPENNMS_VERSION}.noarch.rpm
+RUN rpm -Uvh http://yum.opennms.org/stable/common/opennms/opennms-plugin-protocol-dhcp-${OPENNMS_VERSION}.noarch.rpm
+RUN rpm -Uvh http://yum.opennms.org/stable/common/opennms/opennms-plugin-protocol-xml-${OPENNMS_VERSION}.noarch.rpm
+RUN rpm -Uvh http://yum.opennms.org/stable/common/opennms/opennms-plugin-protocol-nsclient-${OPENNMS_VERSION}.noarch.rpm
+RUN rpm -Uvh http://yum.opennms.org/stable/common/opennms/opennms-plugin-provisioning-snmp-hardware-inventory-${OPENNMS_VERSION}.noarch.rpm
+RUN rpm -Uvh http://yum.opennms.org/stable/common/opennms/opennms-plugin-ticketer-jira-${OPENNMS_VERSION}.noarch.rpm
+RUN rpm -Uvh http://yum.opennms.org/stable/common/opennms/opennms-plugin-ticketer-otrs-${OPENNMS_VERSION}.noarch.rpm
 
 ## File for initial OpenNMS DB installation
 RUN touch /opt/opennms/etc/install_onmsdb

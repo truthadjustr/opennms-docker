@@ -27,7 +27,7 @@
 
 export ORIGIN="schneidermatic"
 export ENTITY="opennms-xp"
-export TAG="opennms-18.0.2_centos-7.2"
+export TAG="opennms-18.0.3_centos-7.2"
 export NAME="opennms_1"
 export IMAGE="$ORIGIN/$ENTITY:$TAG"
 
